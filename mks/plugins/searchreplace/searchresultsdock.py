@@ -12,6 +12,26 @@ from mks.core.core import core
 
 import searchresultsmodel
 
+from PyQt4.QtGui import QItemDelegate, QLabel, QPalette, QRegion, QStyle
+class DrawHtmlDelegate(QItemDelegate):
+    """Item delegate used to draw text with HTML formatting inside
+    """
+    def __init__(self):
+        QItemDelegate.__init__(self)
+        self.label = QLabel()
+    
+    def drawDisplay(self, painter, option, rect, text):
+        self.label.setText(text)
+
+        if option.state & QStyle.State_Selected:
+            p = option.palette
+            p.setColor(QPalette.WindowText, p.color(QPalette.Active, QPalette.HighlightedText))
+
+            self.label.setPalette(p)
+
+        self.label.render(painter, rect.topLeft(), QRegion(), QWidget.DrawChildren)
+
+
 class SearchResultsDock(pDockWidget):
     """Dock with search results
     """
@@ -33,6 +53,9 @@ class SearchResultsDock(pDockWidget):
         self._view.setHeaderHidden( True )
         self._view.setUniformRowHeights( True )
         self._view.setModel( self.model )
+        self._delegate = DrawHtmlDelegate()
+        self._view.setItemDelegate(self._delegate)
+        
         self._layout = QHBoxLayout( widget )
         self._layout.setMargin( 5 )
         self._layout.setSpacing( 5 )
