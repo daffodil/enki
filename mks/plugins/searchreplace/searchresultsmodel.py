@@ -10,6 +10,8 @@ from PyQt4.QtCore import pyqtSignal, QAbstractItemModel, \
                          QModelIndex, Qt, \
                          QVariant
 
+import cgi
+
 class Result:  # pylint: disable=R0902
     """One found by search thread item. Consists coordinates and capture. Used by SearchResultsModel
     """
@@ -32,9 +34,9 @@ class Result:  # pylint: disable=R0902
         return "<html>Line: %d, Column: %d: %s<font style=\"background-color: yellow\">%s</font>%s</html>" % \
                 ( self.line + 1,
                   self.column,
-                  beforeMatch,
-                  self.match.group(0),
-                  afterMatch)
+                  cgi.escape(beforeMatch),
+                  cgi.escape(self.match.group(0)),
+                  cgi.escape(afterMatch))
     
     def tooltip(self):
         """Tooltip of the search result"""
