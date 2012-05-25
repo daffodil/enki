@@ -226,9 +226,19 @@ Fake PyQt4 module, for building docs on system without PyQt (rtfd.org)
 
 http://read-the-docs.readthedocs.org/en/latest/faq.html#my-project-isn-t-building-with-autodoc
 """
+
+import PyQt4.QtCore
+import PyQt4.QtGui
+
+import __builtin__
+with open('attrs.txt') as attrList:
+    attrs  = [line.strip() for line in attrList.readlines()]
+
 class Mock(object):
     def __init__(self, *args, **kwargs):
-        pass
+        for attribute in attrs:
+            setattr(self, attribute, Mock)
+        self.__all__ = attrs
 
     def __call__(self, *args, **kwargs):
         return Mock()
@@ -238,10 +248,13 @@ class Mock(object):
         if name in ('__file__', '__path__'):
             return '/dev/null'
         elif name[0] == name[0].upper():
-            return type(name, (), {})
+            newType = type(name, (), {})
+            setattr(newType, '__module__', __builtin__)
+            type(name, (), {})
+            return 
         else:
             return Mock()
 
-MOCK_MODULES = ['PyQt4', 'PyQt4.QtCore', 'PyQt4.QtGui']
+MOCK_MODULES = ['PyQt4', 'PyQt4.QtCore', 'PyQt4.QtGui', 'PyQt4.Qsci', 'PyQt4.QtWebKit']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()

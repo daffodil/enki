@@ -109,38 +109,7 @@ class Editor(AbstractTextEditor):
     
     Uses QScintilla internally
     """
-    
-    _MARKER_BOOKMARK = -1  # QScintilla marker type
-    
-    _EOL_CONVERTOR_TO_QSCI = {r'\n'     : QsciScintilla.EolUnix,
-                              r'\r\n'   : QsciScintilla.EolWindows,
-                              r'\r'     : QsciScintilla.EolMac}
-    
-    _WRAP_MODE_TO_QSCI = {"WrapWord"      : QsciScintilla.WrapWord,
-                          "WrapCharacter" : QsciScintilla.WrapCharacter}
-    
-    _WRAP_FLAG_TO_QSCI = {"None"           : QsciScintilla.WrapFlagNone,
-                          "ByText"         : QsciScintilla.WrapFlagByText,
-                          "ByBorder"       : QsciScintilla.WrapFlagByBorder}
 
-    _EDGE_MODE_TO_QSCI = {"Line"        : QsciScintilla.EdgeLine,
-                          "Background"  : QsciScintilla.EdgeBackground} 
-    
-    _WHITE_MODE_TO_QSCI = {"Invisible"           : QsciScintilla.WsInvisible,
-                           "Visible"             : QsciScintilla.WsVisible,
-                           "VisibleAfterIndent"  : QsciScintilla.WsVisibleAfterIndent}
-        
-    _AUTOCOMPLETION_MODE_TO_QSCI = {"APIs"      : QsciScintilla.AcsAPIs,
-                                    "Document"  : QsciScintilla.AcsDocument,
-                                    "All"       : QsciScintilla.AcsAll}
-    
-    _BRACE_MATCHING_TO_QSCI = {"Strict"    : QsciScintilla.StrictBraceMatch,
-                               "Sloppy"    : QsciScintilla.SloppyBraceMatch}
-    
-    _CALL_TIPS_STYLE_TO_QSCI = {"NoContext"                : QsciScintilla.CallTipsNoContext,
-                                "NoAutoCompletionContext"  : QsciScintilla.CallTipsNoAutoCompletionContext,
-                                "Context"                  : QsciScintilla.CallTipsContext}
-    
     #
     # Own methods
     #

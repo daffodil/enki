@@ -27,55 +27,6 @@ MKS_PASTE_LINE = -5
 MKS_MOVE_LINES_DOWN = -6
 MKS_MOVE_LINES_UP = -7
 
-_ACTIONS = (\
-(qsci.SCI_PARAUPEXTEND, 'mEdit/mSelection/mParagraph/aUp', tr('Up'), 'Ctrl+Shift+[', ''),
-(qsci.SCI_PARADOWNEXTEND, 'mEdit/mSelection/mParagraph/aDown', tr('Down'), 'Ctrl+Shift+]', ''),
-\
-(qsci.SCI_LINEDOWNRECTEXTEND, 'mEdit/mSelection/mRectangular/aDownOneLine', tr('Down one line'), 'Alt+Shift+Down', ''),
-(qsci.SCI_CHARLEFTRECTEXTEND, 'mEdit/mSelection/mRectangular/aLeftOneCharacter', 
-                                                    tr('Left one character'), 'Alt+Shift+Left', ''),
-(qsci.SCI_CHARRIGHTRECTEXTEND, 'mEdit/mSelection/mRectangular/aRightOneCharacter',
-                                                    tr('Right one character'), 'Alt+Shift+Right', ''),
-(qsci.SCI_HOMERECTEXTEND, 'mEdit/mSelection/mRectangular/aToLineStart', tr('Line start'), 'Alt+Shift+Home', ''),
-(qsci.SCI_LINEENDRECTEXTEND, 'mEdit/mSelection/mRectangular/aToEndOfLine', tr('End of line'), 'Alt+Shift+End', ''),
-(qsci.SCI_PAGEDOWNRECTEXTEND, 'mEdit/mSelection/mRectangular/aDownOnePage',
-                                                    tr('Down one page'), 'Alt+Shift+PgDown', ''),
-(qsci.SCI_PAGEUPRECTEXTEND, 'mEdit/mSelection/mRectangular/aUpOnePage', tr('Up one page'), 'Alt+Shift+PgUp', ''),
-\
-(qsci.SCI_PARAUP, 'mNavigation/mMove/aUp', tr('Paragraph Up'), 'Ctrl+[', ''),
-(qsci.SCI_PARADOWN, 'mNavigation/mMove/aDown', tr('Paragraph Down'), 'Ctrl+]', ''),
-\
-(qsci.SCI_UNDO, 'mEdit/mHistory/aUndo', tr('Undo'), 'Ctrl+Z', 'undo.png'),
-(qsci.SCI_REDO, 'mEdit/mHistory/aRedo', tr('Redo'), 'Ctrl+Y', 'redo.png'),
-\
-(qsci.SCI_LOWERCASE, 'mEdit/mCase/aToLower', tr('To lower'), 'Ctrl+U', ''),
-(qsci.SCI_UPPERCASE, 'mEdit/mCase/aToUpper', tr('To upper'), 'Ctrl+Alt+U', ''),
-\
-(qsci.SCI_LINETRANSPOSE, 'mEdit/aSwapCurrentAndPreviousLine', tr('Swap current and previous line'), 'Ctrl+T', ''),
-(qsci.SCI_EDITTOGGLEOVERTYPE, 'mEdit/aEditToggleOverType', tr('Toggle over type'), 'Ins', ''),
-(qsci.SCI_LINEDELETE, 'mEdit/aDeleteLine', tr('Delete line'), 'Alt+Del', 'deleted.png'),
-\
-(qsci.SCI_COPY, 'mEdit/mCopyPaste/aCopy', tr('Copy'), 'Ctrl+C', 'copy.png'),
-(MKS_PASTE, 'mEdit/mCopyPaste/aPaste', tr('Paste'), 'Ctrl+V', 'paste.png'),
-(qsci.SCI_CUT, 'mEdit/mCopyPaste/aCut', tr('Cut'), 'Ctrl+X', 'cut.png'),
-(qsci.SCI_LINECOPY, 'mEdit/mCopyPaste/aCopyLine', tr('Copy line'), 'Alt+C', 'copy.png'),
-(qsci.SCI_LINECUT, 'mEdit/mCopyPaste/aCutLine', tr('Cut line'), 'Alt+X', 'cut.png'),
-(MKS_PASTE_LINE, 'mEdit/mCopyPaste/aPasteLine', tr('Paste line'), 'Alt+V', 'paste.png'),
-(qsci.SCI_SELECTIONDUPLICATE, 'mEdit/mCopyPaste/aDuplicateSelection', tr('Duplicate selection or line'), 'Ctrl+D', ''),
-(MKS_MOVE_LINES_UP, 'mEdit/aMoveLinesUp', tr('Move lines up'), 'Alt+Up', 'up.png'),
-(MKS_MOVE_LINES_DOWN, 'mEdit/aMoveLinesDown', tr('Move lines down'), 'Alt+Down', 'down.png'),
-\
-(qsci.SCI_ZOOMIN, 'mView/mZoom/aZoomIn', tr('Zoom In'), 'Ctrl+=', ''),
-(qsci.SCI_ZOOMIN, 'mView/mZoom/aZoomInAlt', tr('Zoom In  (alt. shortcut)'), 'Ctrl++', ''),
-(qsci.SCI_ZOOMOUT, 'mView/mZoom/aZoomOut', tr('Zoom Out'), 'Ctrl+-', ''),
-\
-(MKS_TOGGLE_BOOKMARK, 'mNavigation/mBookmarks/aSetBookmark', tr('Set (clear) bookmark'), 'Ctrl+B', ''),
-(MKS_NEXT_BOOKMARK, 'mNavigation/mBookmarks/aPreviousBookmark', tr('Next bookmark'), 'Alt+PgDown', ''),
-(MKS_PREV_BOOKMARK, 'mNavigation/mBookmarks/aNextBookmark', tr('Previous bookmark'), 'Alt+PgUp', ''),
-\
-(qsci.SCI_LINESCROLLDOWN, 'mNavigation/mScroll/aDownOneLine', tr('Down one line'), 'Ctrl+Down', ''),
-(qsci.SCI_LINESCROLLUP, 'mNavigation/mScroll/aUpOneLine', tr('Up one line'), 'Ctrl+Up', ''),
-)
 
 _MENUS = (\
 ('mEdit/mSelection', tr('Selection'), ''),

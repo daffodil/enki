@@ -22,6 +22,7 @@ DATA_FILES_PATH = os.path.join(os.path.dirname(__file__), '..')
 _DEFAULT_CONFIG_PATH = os.path.join(DATA_FILES_PATH, 'config/mksv3.default.json')
 _CONFIG_PATH = os.path.join(mks.core.defines.CONFIG_DIR, 'mksv3.json')
 
+print 'qobj is', QObject, type(QObject)
 
 class Core(QObject):
     """Core object initializes system at startup and terminates when closing.

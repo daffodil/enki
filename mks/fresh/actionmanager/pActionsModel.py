@@ -16,8 +16,8 @@ class ActionModel(QAbstractItemModel):
     Shortcut = 1
     DefaultShortcut = 2
     
-    MenuRole = Qt.UserRole
-    ActionRole = Qt.UserRole + 1
+    MenuRole = 128
+    ActionRole = 129
 
     def __init__(self, manager):
         QAbstractItemModel.__init__(self, manager)
@@ -33,7 +33,7 @@ class ActionModel(QAbstractItemModel):
     def columnCount(self, parent=QModelIndex()):
         return ActionModel._COLUMN_COUNT
 
-    def data(self, index, role=Qt.DisplayRole):
+    def data(self, index):
         if not index.isValid():
             return QVariant()
         
@@ -115,7 +115,7 @@ class ActionModel(QAbstractItemModel):
             else:
                 return False
 
-    def headerData(self, section, orientation, role=Qt.DisplayRole):
+    def headerData(self, section, orientation):
         if orientation == Qt.Horizontal:
             if  role == Qt.DisplayRole or role == Qt.ToolTipRole :
                 if section == ActionModel.Action:
