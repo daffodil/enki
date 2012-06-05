@@ -30,16 +30,7 @@ class _QsciScintilla(QsciScintilla):
     def __init__(self, editor):
         self._editor = editor
         QsciScintilla.__init__(self, editor)
-        
-        # Init extra selection
-        # We use 0 id for it
-        self.SendScintilla(self.SCI_INDICSETSTYLE, 0, self.INDIC_ROUNDBOX)
-        self.SendScintilla(self.SCI_INDICSETUNDER, 0, True)
-        self.SendScintilla(self.SCI_INDICSETFORE, 0, QColor('yellow'))
-        self.SendScintilla(self.SCI_INDICSETALPHA, 0, 100)
-        if hasattr(self, "SCI_INDICSETOUTLINEALPHA"):
-            self.SendScintilla(self.SCI_INDICSETOUTLINEALPHA, 0, 0)
-
+    
     def keyPressEvent(self, event):
         """Key pressing handler
         """
@@ -170,6 +161,7 @@ class Editor(AbstractTextEditor):
         self._MARKER_BOOKMARK = self.qscintilla.markerDefine(pixmap, -1)
         
         self._initQsciShortcuts()
+        self._initExtraSelections()
         
         self.qscintilla.setUtf8(True)
         
@@ -215,6 +207,15 @@ class Editor(AbstractTextEditor):
         
         self.modifiedChanged.emit(self.isModified())
         self.cursorPositionChanged.emit(*self.cursorPosition())
+
+    def _initExtraSelections(self):
+        """Configure extra selections style
+        """
+        self._extraSelectionIndicatorIndex = self.indicatorDefine(self.RoundBoxIndicator)
+        self.setIndicatorDrawUnder(True, self._extraSelectionIndicatorIndex)
+        self.setIndicatorForegroundColor(QColor('yellow'), self._extraSelectionIndicatorIndex)
+        self.setIndicatorOutlineColor(QColor('yellow'), self._extraSelectionIndicatorIndex)
+
 
     def _initQsciShortcuts(self):
         """Clear default QScintilla shortcuts, and restore only ones, which are needed for MkS.
@@ -596,8 +597,9 @@ class Editor(AbstractTextEditor):
         Used for highlighting search results
         Selections is list of turples (startAbsolutePosition, length)
         """
-        self.qscintilla.SendScintilla(self.qscintilla.SCI_INDICATORCLEARRANGE, 0, self.qscintilla.length())
-        self.qscintilla.SendScintilla(self.qscintilla.SCI_SETINDICATORCURRENT, 0)
+        self.qscintilla.clearIndicatorRange(0, 0, self.lines(), len(self.line(self.lines() - 1)),
+                                            self._extraSelectionIndicatorIndex)
+                                 
         
         """hlamer: I'm very sorry, but, too lot of extra selections freezes the editor
         I should to an optimization for searching and highlighting only visible lines
@@ -643,15 +645,8 @@ class Editor(AbstractTextEditor):
             endLine, endCol = line, column
             lastPos = endAbsPos
             
-            #Underlying Scintilla uses a byte index from the start of the text
-            #This index differs from absolute position, if \r\n or unicode is being used
-            startScintillaIndex = self.qscintilla.positionFromLineIndex(startLine, startCol)
-            endScintillaIndex = self.qscintilla.positionFromLineIndex(endLine, endCol)
-        
-            self.qscintilla.SendScintilla(self.qscintilla.SCI_INDICATORFILLRANGE,
-                                          startScintillaIndex,
-                                          endScintillaIndex - startScintillaIndex)
-            
+            self.qscintilla.fillIndicatorRange(startLine, startCol, endLine, endCol, self._extraSelectionIndicatorIndex)
+
     #
     # Public methods for editorshortcuts
     #
